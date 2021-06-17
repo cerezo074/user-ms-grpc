@@ -1,0 +1,304 @@
+{
+	"info": {
+		"_postman_id": "4d5b246a-7554-4980-a627-8022e911b3e4",
+		"name": "Freefortalking",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Get all users",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:3000/api/v1/users",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"api",
+						"v1",
+						"users"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get a user",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"name\": \"elichigo\",\n    \"password\": \"abcd\",\n    \"email\": \"a@f.co\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:3000/api/v1/users/email?address=example@tests.com",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"api",
+						"v1",
+						"users",
+						"email"
+					],
+					"query": [
+						{
+							"key": "address",
+							"value": "example@tests.com"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Delete a user",
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:3000/api/v1/users/email?address=faustino@asprilla.com",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"api",
+						"v1",
+						"users",
+						"email"
+					],
+					"query": [
+						{
+							"key": "address",
+							"value": "faustino@asprilla.com"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Update a user",
+			"request": {
+				"method": "PUT",
+				"header": [],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "email",
+							"value": "faustino@asprilla.com",
+							"type": "text"
+						},
+						{
+							"key": "nickname",
+							"value": "El Tino Asprilla",
+							"type": "text"
+						},
+						{
+							"key": "password",
+							"value": "456",
+							"type": "text"
+						},
+						{
+							"key": "image_data",
+							"type": "file",
+							"src": "/Users/eli.pacheco/Downloads/asprilla.jpg"
+						},
+						{
+							"key": "country_code",
+							"value": "COL",
+							"type": "text"
+						},
+						{
+							"key": "birthday",
+							"value": "12/22/1960",
+							"type": "text"
+						}
+					],
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:3000/api/v1/users",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"api",
+						"v1",
+						"users"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Create user 1",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "email",
+							"value": "elpibe@pescadito.c",
+							"type": "text"
+						},
+						{
+							"key": "nickname",
+							"value": "El pibe valderrama",
+							"type": "text"
+						},
+						{
+							"key": "password",
+							"value": "123",
+							"type": "text"
+						},
+						{
+							"key": "image_data",
+							"type": "file",
+							"src": "/Users/eli.pacheco/Downloads/pibe.jpeg"
+						},
+						{
+							"key": "country_code",
+							"value": "COL",
+							"type": "text"
+						},
+						{
+							"key": "birthday",
+							"value": "12/22/2020",
+							"type": "text"
+						}
+					],
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:3000/api/v1/users",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"api",
+						"v1",
+						"users"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Create user 2",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "email",
+							"value": "faustino@asprilla.com",
+							"type": "text"
+						},
+						{
+							"key": "nickname",
+							"value": "El Tino",
+							"type": "text"
+						},
+						{
+							"key": "password",
+							"value": "123",
+							"type": "text"
+						},
+						{
+							"key": "image_data",
+							"type": "file",
+							"src": []
+						},
+						{
+							"key": "country_code",
+							"value": "COL",
+							"type": "text"
+						},
+						{
+							"key": "birthday",
+							"value": "12/22/2020",
+							"type": "text"
+						}
+					],
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:3000/api/v1/users",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"api",
+						"v1",
+						"users"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get Profile Image",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:3000/api/v1/users/image/2ac2be96-c956-42b1-9ee0-e697341acd6e",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"api",
+						"v1",
+						"users",
+						"image",
+						"2ac2be96-c956-42b1-9ee0-e697341acd6e"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
