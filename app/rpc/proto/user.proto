@@ -1,0 +1,14 @@
+syntax = "proto3";
+
+option go_package=".;userpb";
+
+message User {
+    string name = 1;
+    string email = 2;
+    string nickname = 3;
+    string password = 4;
+    string imagePath = 5;
+    string countryCode = 6;
+    string birthday = 7;
+}
+

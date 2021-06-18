@@ -1,0 +1,30 @@
+syntax = "proto3";
+
+option go_package=".;userpb";
+import "proto/user.proto";
+import "proto/imageChunk.proto";
+import "google/protobuf/empty.proto";
+
+message UserIdentity {
+    string email = 1;
+}
+
+message UserResponse {
+    User body = 1;
+}
+
+message UsersResponse {
+    repeated User users = 1;
+}
+
+message UserRequest {
+    User body = 1;
+}
+
+service UserService {
+    rpc GetUser(UserIdentity) returns (UserResponse) {};
+    rpc GetUsers(google.protobuf.Empty) returns (UsersResponse) {};
+    rpc SaveUser(UserRequest) returns (UsersResponse) {};
+    rpc UpdateUser(UserRequest) returns (UserResponse) {};
+    rpc SaveProfileImage(stream ImageChunk) returns (UserResponse) {};
+}
