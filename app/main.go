@@ -1,22 +1,27 @@
 package main
 
 import (
+	"fmt"
 	"log"
-	"user/app/utils/response"
+	"net"
 	"user/core/dependencies/dependency"
 	"user/core/dependencies/services"
 	"user/core/routers"
 
-	"github.com/gofiber/fiber/v2"
+	"google.golang.org/grpc"
 )
 
 type server struct {
-	app           *fiber.App
-	serverAddress string
+	listener net.Listener
+	grpc     *grpc.Server
+	address  string
 }
 
 func (object *server) start() {
-	log.Fatal(object.app.Listen(object.serverAddress))
+	fmt.Println("Server Listening...")
+	if err := object.grpc.Serve(object.listener); err != nil {
+		log.Fatalf("Failed to serve: %v", err)
+	}
 }
 
 func SetupApp(dependencies *services.App) (*server, error) {
@@ -30,16 +35,23 @@ func SetupApp(dependencies *services.App) (*server, error) {
 		appDependencies = defaultDependencies
 	}
 
-	fiberApp := fiber.New(fiber.Config{
-		ErrorHandler: response.HandleJSONError,
-	})
+	listener, err := net.Listen(
+		appDependencies.Credentials.ServerTransportProtocol,
+		appDependencies.Credentials.FullServerAddress(),
+	)
+	if err != nil {
+		log.Fatalf("Failed to listen: %v", err)
+		return nil, err
+	}
 
+	grpcServer := grpc.NewServer()
 	userRouter := routers.NewUserRouter()
-	userRouter.Register(fiberApp, *appDependencies)
+	userRouter.Register(grpcServer, *appDependencies)
 
 	return &server{
-		app:           fiberApp,
-		serverAddress: appDependencies.Credentials.ServerAddress,
+		listener: listener,
+		grpc:     grpcServer,
+		address:  appDependencies.Credentials.ServerAddress,
 	}, nil
 }
 

@@ -1,9 +1,7 @@
 package handlers
 
-import (
-	"github.com/gofiber/fiber/v2"
-)
+import "google.golang.org/grpc"
 
-type MethodHandlers interface {
-	RegisterMethods(app *fiber.App)
+type AppHandler interface {
+	RegisterCrud(server *grpc.Server)
 }

@@ -21,7 +21,7 @@ const _ = grpc.SupportPackageIsVersion7
 type UserServiceClient interface {
 	GetUser(ctx context.Context, in *UserIdentity, opts ...grpc.CallOption) (*UserResponse, error)
 	GetUsers(ctx context.Context, in *emptypb.Empty, opts ...grpc.CallOption) (*UsersResponse, error)
-	SaveUser(ctx context.Context, in *UserRequest, opts ...grpc.CallOption) (*UsersResponse, error)
+	SaveUser(ctx context.Context, in *UserRequest, opts ...grpc.CallOption) (*UserResponse, error)
 	UpdateUser(ctx context.Context, in *UserRequest, opts ...grpc.CallOption) (*UserResponse, error)
 	SaveProfileImage(ctx context.Context, opts ...grpc.CallOption) (UserService_SaveProfileImageClient, error)
 }
@@ -52,8 +52,8 @@ func (c *userServiceClient) GetUsers(ctx context.Context, in *emptypb.Empty, opt
 	return out, nil
 }
 
-func (c *userServiceClient) SaveUser(ctx context.Context, in *UserRequest, opts ...grpc.CallOption) (*UsersResponse, error) {
-	out := new(UsersResponse)
+func (c *userServiceClient) SaveUser(ctx context.Context, in *UserRequest, opts ...grpc.CallOption) (*UserResponse, error) {
+	out := new(UserResponse)
 	err := c.cc.Invoke(ctx, "/UserService/SaveUser", in, out, opts...)
 	if err != nil {
 		return nil, err
@@ -110,7 +110,7 @@ func (x *userServiceSaveProfileImageClient) CloseAndRecv() (*UserResponse, error
 type UserServiceServer interface {
 	GetUser(context.Context, *UserIdentity) (*UserResponse, error)
 	GetUsers(context.Context, *emptypb.Empty) (*UsersResponse, error)
-	SaveUser(context.Context, *UserRequest) (*UsersResponse, error)
+	SaveUser(context.Context, *UserRequest) (*UserResponse, error)
 	UpdateUser(context.Context, *UserRequest) (*UserResponse, error)
 	SaveProfileImage(UserService_SaveProfileImageServer) error
 	mustEmbedUnimplementedUserServiceServer()
@@ -126,7 +126,7 @@ func (UnimplementedUserServiceServer) GetUser(context.Context, *UserIdentity) (*
 func (UnimplementedUserServiceServer) GetUsers(context.Context, *emptypb.Empty) (*UsersResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method GetUsers not implemented")
 }
-func (UnimplementedUserServiceServer) SaveUser(context.Context, *UserRequest) (*UsersResponse, error) {
+func (UnimplementedUserServiceServer) SaveUser(context.Context, *UserRequest) (*UserResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method SaveUser not implemented")
 }
 func (UnimplementedUserServiceServer) UpdateUser(context.Context, *UserRequest) (*UserResponse, error) {

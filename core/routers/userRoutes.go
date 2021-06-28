@@ -4,10 +4,9 @@ import (
 	"user/core/dependencies/services"
 	"user/core/handlers"
 
-	"github.com/gofiber/fiber/v2"
+	"google.golang.org/grpc"
 )
 
-//NewUserRouter factory method for creating a route handler to users
 func NewUserRouter() RouteHandler {
 	return userRoutes{}
 }
@@ -15,8 +14,7 @@ func NewUserRouter() RouteHandler {
 type userRoutes struct {
 }
 
-//Register insert user handlers into app
-func (router userRoutes) Register(app *fiber.App, appDependencies services.App) {
-	crudHandler := handlers.NewUserHandler(appDependencies)
-	crudHandler.RegisterMethods(app)
+func (router userRoutes) Register(server *grpc.Server, appDependencies services.App) {
+	userHandler := handlers.NewUserHandler(appDependencies)
+	userHandler.RegisterCrud(server)
 }

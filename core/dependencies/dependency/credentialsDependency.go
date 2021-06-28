@@ -10,7 +10,7 @@ var (
 
 func NewCredentials(path string) (*config.Credentials, error) {
 	config, err := config.LoadCredentials(path)
-	return &config, err
+	return config, err
 }
 
 func FakeCredentials() config.Credentials {

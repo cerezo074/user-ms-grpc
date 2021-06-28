@@ -10,7 +10,7 @@
             "request": "launch",
             "mode": "debug",
             "program": "${workspaceFolder}/app/main.go",
-            "port": 3000,
+            "port": 50051,
             "envFile": "${workspaceFolder}/app/app.env"
         }
     ]

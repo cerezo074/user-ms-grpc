@@ -24,7 +24,7 @@ message UserRequest {
 service UserService {
     rpc GetUser(UserIdentity) returns (UserResponse) {};
     rpc GetUsers(google.protobuf.Empty) returns (UsersResponse) {};
-    rpc SaveUser(UserRequest) returns (UsersResponse) {};
+    rpc SaveUser(UserRequest) returns (UserResponse) {};
     rpc UpdateUser(UserRequest) returns (UserResponse) {};
     rpc SaveProfileImage(stream ImageChunk) returns (UserResponse) {};
 }
