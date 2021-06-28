@@ -19,4 +19,11 @@ migration_up:
 migration_down:
 	migrate -path ../db/migration -database "postgres://admin:password@localhost:5432/freefortalking?sslmode=disable" -verbose down
 
-.PHONY: create_postgres drop_postgress create_db drop_db migration_up migration_down
+# Models Generation - GRPC
+build_proto:
+	rm -rf ../rpc/pb
+	mkdir ../rpc/pb
+	protoc -I. ../rpc/proto/*/*.proto --proto_path=../rpc/proto --go_out=../rpc/pb --go-grpc_out=../rpc/pb
+
+
+.PHONY: create_postgres drop_postgress create_db drop_db migration_up migration_down build_proto

@@ -1,8 +1,8 @@
 syntax = "proto3";
 
-option go_package=".;userpb";
-import "proto/user.proto";
-import "proto/imageChunk.proto";
+option go_package="./;pb";
+import "account/user.proto";
+import "file/imageChunk.proto";
 import "google/protobuf/empty.proto";
 
 message UserIdentity {
