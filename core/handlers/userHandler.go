@@ -51,8 +51,8 @@ type userHandler struct {
 // 	Email string
 // }
 
-func (object userHandler) RegisterCrud(server *grpc.Server) {
-	pb.RegisterUserServiceServer(server, &object)
+func (object *userHandler) RegisterCrud(server *grpc.Server) {
+	pb.RegisterUserServiceServer(server, object)
 	// app.Get("/api/v1/users", object.getUsers)
 	// app.Get("/api/v1/users/email", object.getUser)
 	// app.Get(imagePath+":id", object.userImage().NewDownloader(), object.getImage)
@@ -61,7 +61,7 @@ func (object userHandler) RegisterCrud(server *grpc.Server) {
 	// app.Delete("/api/v1/users/email", object.userImage().DeleteImage(), object.deleteUser)
 }
 
-func (object userHandler) GetUser(context.Context, *UserIdentity) (*UserResponse, error) {
+func (object *userHandler) GetUser(context.Context, *UserIdentity) (*UserResponse, error) {
 	response := &UserResponse{
 		Body: &User{
 			Name:        "example",
@@ -77,7 +77,7 @@ func (object userHandler) GetUser(context.Context, *UserIdentity) (*UserResponse
 	return response, nil
 }
 
-func (object userHandler) GetUsers(context.Context, *emptypb.Empty) (*UsersResponse, error) {
+func (object *userHandler) GetUsers(context.Context, *emptypb.Empty) (*UsersResponse, error) {
 	allUsers := []*User{
 		&User{
 			Name:        "example",
@@ -105,7 +105,7 @@ func (object userHandler) GetUsers(context.Context, *emptypb.Empty) (*UsersRespo
 	return response, nil
 }
 
-func (object userHandler) SaveUser(context.Context, *UserRequest) (*UserResponse, error) {
+func (object *userHandler) SaveUser(context.Context, *UserRequest) (*UserResponse, error) {
 	response := &UserResponse{
 		Body: &User{
 			Name:        "example",
@@ -121,7 +121,7 @@ func (object userHandler) SaveUser(context.Context, *UserRequest) (*UserResponse
 	return response, nil
 }
 
-func (object userHandler) UpdateUser(context.Context, *UserRequest) (*UserResponse, error) {
+func (object *userHandler) UpdateUser(context.Context, *UserRequest) (*UserResponse, error) {
 	response := &UserResponse{
 		Body: &User{
 			Name:        "example",
@@ -137,7 +137,7 @@ func (object userHandler) UpdateUser(context.Context, *UserRequest) (*UserRespon
 	return response, nil
 }
 
-func (object userHandler) SaveProfileImage(fileStreamRequest UserService_SaveProfileImageServer) error {
+func (object *userHandler) SaveProfileImage(fileStreamRequest UserService_SaveProfileImageServer) error {
 	buffer, filename, err := processStream(fileStreamRequest)
 	if err != nil {
 		log.Printf("Error receiving chunk data, %v", err)
